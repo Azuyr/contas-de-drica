@@ -3,6 +3,7 @@ package br.com.azuyr.italo.contasapagar;
 import android.widget.EditText;
 
 import br.com.azuyr.italo.contasapagar.models.Categoria;
+import br.com.azuyr.italo.contasapagar.models.CategoriaVencimento;
 
 public class FormularioHelper {
     private final EditText campoNome;
@@ -30,4 +31,5 @@ public class FormularioHelper {
 
         this.categoria = categoria;
     }
+
 }

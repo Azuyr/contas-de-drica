@@ -10,21 +10,26 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.azuyr.italo.contasapagar.CategoriaActivity;
 import br.com.azuyr.italo.contasapagar.models.Categoria;
 import br.com.azuyr.italo.contasapagar.models.CategoriaVencimento;
+import br.com.azuyr.italo.contasapagar.utils.Util;
 
 public class ContasAPagarDAO extends SQLiteOpenHelper{
 
     public ContasAPagarDAO(Context context) {
         super(context, "ContasAPagar",null, 2);
     }
+    Util util;
 
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE Categorias (id INTEGER PRIMARY KEY, nome TEXT NOT NULL, observacao TEXT)";
         db.execSQL(sql);
 
-        sql = "CREATE TABLE Categorias_Vencimentos (id INTEGER PRIMARY KEY, id_categoria INTEGER, data_Vencimento DATE NOT NULL, pago BIT)";
+        sql = "CREATE TABLE Categorias_Vencimentos (id INTEGER PRIMARY KEY, id_categoria INTEGER, data_vencimento DATE NOT NULL, valor DOUBLE, titulo STRING, resumo STRING)";
         db.execSQL(sql);
+
+        util = new Util();
 
     }
 
@@ -39,14 +44,6 @@ public class ContasAPagarDAO extends SQLiteOpenHelper{
         onCreate(db);
     }
 
-    public void insere(Categoria categoria) {
-        SQLiteDatabase db = getWritableDatabase();
-
-        ContentValues dados = getDadosCategoria(categoria);
-
-        db.insert("Categorias",null, dados);
-    }
-
     @NonNull
     private ContentValues getDadosCategoria(Categoria categoria) {
         ContentValues dados = new ContentValues();
@@ -54,6 +51,8 @@ public class ContasAPagarDAO extends SQLiteOpenHelper{
         dados.put("observacao",categoria.getObservacao());
         return dados;
     }
+
+
 
     public List<Categoria> buscaCategorias() {
         String sql = "SELECT * FROM [Categorias]";
@@ -76,25 +75,12 @@ public class ContasAPagarDAO extends SQLiteOpenHelper{
         return categorias;
     }
 
-    public List<CategoriaVencimento> buscaCategoriasVencimentos(long idCategoria) {
-        String sql = "SELECT * FROM [CategoriasVencimentos] WHERE [id_categoria]=" + idCategoria;
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery(sql, null);
+   public void insere(Categoria categoria) {
+        SQLiteDatabase db = getWritableDatabase();
 
-        List<CategoriaVencimento> categoriaVencimentos = new ArrayList<CategoriaVencimento>();
+        ContentValues dados = getDadosCategoria(categoria);
 
-        while (c.moveToNext()){
-            CategoriaVencimento categoriaVencimento = new CategoriaVencimento();
-            categoriaVencimento.setId(c.getLong(c.getColumnIndex("id")));
-            //categoriaVencimento.setData_vencimento(c.get(c.getColumnIndex("data_vencimento")));
-            //categoria.setObservacao(c.getString(c.getColumnIndex("pago")));
-
-            categoriaVencimentos.add(categoriaVencimento);
-        }
-
-        c.close();
-
-        return categoriaVencimentos;
+        db.insert("Categorias",null, dados);
     }
 
     public void deleta(Categoria categoria) {
@@ -113,5 +99,69 @@ public class ContasAPagarDAO extends SQLiteOpenHelper{
         String[] params = {categoria.getId().toString()};
 
         db.update("Categorias",dados,"id = ?", params);
+    }
+
+    private ContentValues getDadosCategoriaVencimento(CategoriaVencimento categoriaVencimento) {
+        ContentValues dados = new ContentValues();
+        dados.put("id_categoria",categoriaVencimento.getId_categoria());
+        dados.put("data_vencimento",categoriaVencimento.getData_vencimento());
+        dados.put("titulo",categoriaVencimento.getTitulo());
+        dados.put("resumo",categoriaVencimento.getResumo());
+        dados.put("valor",categoriaVencimento.getValor());
+        return dados;
+    }
+
+    public List<CategoriaVencimento> buscaCategoriasVencimentos(long idCategoria) {
+        String sql = "SELECT * FROM [Categorias_Vencimentos] WHERE [id_categoria]=" + idCategoria;
+        SQLiteDatabase db = getReadableDatabase();
+
+        sql = "SELECT * FROM [Categorias_Vencimentos]";
+        Cursor c = db.rawQuery(sql, null);
+
+        List<CategoriaVencimento> categoriaVencimentos = new ArrayList<CategoriaVencimento>();
+
+        c.moveToFirst();
+
+        while (c.moveToNext()){
+            CategoriaVencimento categoriaVencimento = new CategoriaVencimento();
+            categoriaVencimento.setId(c.getLong(c.getColumnIndex("id")));
+            categoriaVencimento.setData_vencimento(c.getLong(c.getColumnIndex("data_vencimento")));
+            categoriaVencimento.setValor(c.getDouble(c.getColumnIndex("valor")));
+            categoriaVencimento.setResumo(c.getString(c.getColumnIndex("resumo")));
+            categoriaVencimento.setTitulo(c.getString(c.getColumnIndex("titulo")));
+            categoriaVencimento.setId_categoria(c.getLong(c.getColumnIndex("id_categoria")));
+
+            categoriaVencimentos.add(categoriaVencimento);
+        }
+
+        c.close();
+
+        return categoriaVencimentos;
+    }
+
+    public void insere(CategoriaVencimento categoriaVencimento) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues dados = getDadosCategoriaVencimento(categoriaVencimento);
+
+        db.insert("Categorias_Vencimentos",null, dados);
+    }
+
+    public void deleta(CategoriaVencimento categoriaVencimento) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        String[] params = {categoriaVencimento.getId().toString()};
+
+        db.delete("Categorias_Vencimentos","id = ?",params);
+    }
+
+    public void altera(CategoriaVencimento categoriaVencimento) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues dados = getDadosCategoriaVencimento(categoriaVencimento);
+
+        String[] params = {categoriaVencimento.getId().toString()};
+
+        db.update("Categorias_Vencimentos",dados,"id = ?", params);
     }
 }

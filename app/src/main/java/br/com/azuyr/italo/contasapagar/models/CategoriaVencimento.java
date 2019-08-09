@@ -9,8 +9,8 @@ public class CategoriaVencimento implements Serializable {
     private Long id_categoria;
     private String titulo;
     private String resumo;
-    private  Double valor;
-    private Date data_vencimento;
+    private Double valor;
+    private Long data_vencimento;
     private Boolean pago;
 
     public Long getId() {
@@ -53,19 +53,12 @@ public class CategoriaVencimento implements Serializable {
         this.valor = valor;
     }
 
-    public Date getData_vencimento() {
+    public Long getData_vencimento() {
         return data_vencimento;
     }
 
-    public void setData_vencimento(Date data_vencimento) {
+    public void setData_vencimento(Long data_vencimento) {
         this.data_vencimento = data_vencimento;
     }
 
-    public Boolean getPago() {
-        return pago;
-    }
-
-    public void setPago(Boolean pago) {
-        this.pago = pago;
-    }
 }
