@@ -1,6 +1,7 @@
 package br.com.azuyr.italo.contasapagar;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -16,6 +17,7 @@ import java.util.List;
 
 import br.com.azuyr.italo.contasapagar.dao.ContasAPagarDAO;
 import br.com.azuyr.italo.contasapagar.models.Categoria;
+import br.com.azuyr.italo.contasapagar.models.ContaVencimento;
 
 public class CategoriasListaActivity extends AppCompatActivity {
 
@@ -31,13 +33,15 @@ public class CategoriasListaActivity extends AppCompatActivity {
         listaCategorias.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Categoria categoria = (Categoria) listaCategorias.getItemAtPosition(i);
+                ContaVencimento contaVencimento = (ContaVencimento) listaCategorias.getItemAtPosition(i);
 
                 Intent intentIrParaForm = new Intent(CategoriasListaActivity.this,CategoriaActivity.class);
-                intentIrParaForm.putExtra("conta",categoria);
+                intentIrParaForm.putExtra("conta",contaVencimento);
                 startActivity(intentIrParaForm);
 
-                Toast.makeText(CategoriasListaActivity.this,"Editando Conta '" + categoria.getNome() + "'",Toast.LENGTH_SHORT).show();
+                Snackbar.make(view, "Editando Conta '" + contaVencimento.getTitulo() + "'", Snackbar.LENGTH_LONG);
+                        //.setAction("Action", null).show();
+                //Toast.makeText(CategoriasListaActivity.this,"Editando Conta '" + categoria.getNome() + "'",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -55,10 +59,12 @@ public class CategoriasListaActivity extends AppCompatActivity {
 
     private void carregaLista() {
         ContasAPagarDAO dao = new ContasAPagarDAO(this);
-        List<Categoria> categorias = dao.buscaCategorias();
+        //List<Categoria> categorias = dao.buscaCategorias();
+        List<ContaVencimento> contas = dao.buscaContasVencimentos();
         dao.close();
 
-        ArrayAdapter<Categoria> adapter = new ArrayAdapter<Categoria>(this, android.R.layout.simple_list_item_1, categorias);
+        //ArrayAdapter<Categoria> adapter = new ArrayAdapter<Categoria>(this, android.R.layout.simple_list_item_1, categorias);
+        ArrayAdapter<ContaVencimento> adapter = new ArrayAdapter<ContaVencimento>(this, android.R.layout.simple_list_item_1, contas);
         listaCategorias.setAdapter(adapter);
     }
 

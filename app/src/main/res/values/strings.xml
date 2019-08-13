@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Contas a Pagar</string>
+    <string name="title_activity_contas_vencimentos">Conta Detalhada</string>
 </resources>
