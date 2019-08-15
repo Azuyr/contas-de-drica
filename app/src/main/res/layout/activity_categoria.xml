@@ -9,34 +9,32 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/categoria_nome"
-            android:hint="Nome"
+            android:id="@+id/contas_vencimentos_titulo"
+            android:hint="Título"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="text"/>
 
         <EditText
-            android:id="@+id/categoria_observacao"
-            android:hint="Observação"
+            android:id="@+id/contas_vencimentos_resumo"
+            android:hint="Resumo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="text"/>
 
-        <View
-            android:id="@+id/categoria_linha_divisoria"
+        <EditText
+            android:id="@+id/contas_vencimentos_valor"
+            android:hint="0.00"
             android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="#ffb300" />
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"/>
 
-        <!--<Button-->
-            <!--android:id="@+id/categoria_add_vencimentos"-->
-            <!--android:text="Adicionar Vencimentos"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content" />-->
-
-        <!--<ListView-->
-            <!--android:id="@+id/categorias_lista_vencimentos"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content">-->
-        <!--</ListView>-->
+        <EditText
+            android:id="@+id/contas_vencimentos_vencimento"
+            android:hint="Vencimento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date"/>
 
     </LinearLayout>
 </ScrollView>

@@ -10,21 +10,21 @@
         android:hint="Nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:inputType="text"/>
 
     <EditText
         android:id="@+id/categorias_lista_email_identificacao"
         android:hint="E-mail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:inputType="textEmailAddress"/>
 
     <EditText
         android:id="@+id/categorias_lista_telefone_identificacao"
         android:hint="Telefone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:inputType="phone"/>
 
     <View
         android:id="@+id/categorias_lista_linha_divisoria"

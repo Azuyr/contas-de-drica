@@ -182,6 +182,8 @@ public class ContasAPagarDAO extends SQLiteOpenHelper{
         ContentValues dados = new ContentValues();
         dados.put("nome",identificacao.getNome());
         dados.put("email",identificacao.getEmail());
+        dados.put("telefone",identificacao.getTelefone());
+
         return dados;
     }
 
@@ -209,6 +211,10 @@ public class ContasAPagarDAO extends SQLiteOpenHelper{
         String[] params = {identificacao.getId().toString()};
 
         db.update("Identificacao",dados,"id = ?", params);
+    }
+
+    public Identificacao getIdentificacao(){
+        return buscaContasIdentificacao().get(0);
     }
 
     public List<Identificacao> buscaContasIdentificacao() {
@@ -242,6 +248,7 @@ public class ContasAPagarDAO extends SQLiteOpenHelper{
     private ContentValues getDadosContasVencimentos(ContaVencimento contasVencimentos) {
         ContentValues dados = new ContentValues();
         dados.put("titulo",contasVencimentos.getTitulo());
+        dados.put("resumo",contasVencimentos.getResumo());
         dados.put("valor",contasVencimentos.getValor());
         dados.put("vencimento",contasVencimentos.getVencimento());
         return dados;
@@ -257,9 +264,10 @@ public class ContasAPagarDAO extends SQLiteOpenHelper{
         while (c.moveToNext()){
             ContaVencimento conta = new ContaVencimento();
             conta.setId(c.getLong(c.getColumnIndex("id")));
-            conta.setTitulo(c.getString(c.getColumnIndex("nome")));
-            conta.setValor(c.getDouble(c.getColumnIndex("observacao")));
-            conta.setVencimento(c.getLong(c.getColumnIndex("observacao")));
+            conta.setTitulo(c.getString(c.getColumnIndex("titulo")));
+            conta.setResumo(c.getString(c.getColumnIndex("resumo")));
+            conta.setVencimento(c.getLong(c.getColumnIndex("vencimento")));
+            conta.setValor(c.getDouble(c.getColumnIndex("valor")));
 
             contasVencimentos.add(conta);
         }

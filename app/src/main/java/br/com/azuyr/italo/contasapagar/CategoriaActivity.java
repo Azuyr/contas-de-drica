@@ -11,12 +11,12 @@ import android.widget.Toast;
 
 import br.com.azuyr.italo.contasapagar.dao.ContasAPagarDAO;
 import br.com.azuyr.italo.contasapagar.models.Categoria;
+import br.com.azuyr.italo.contasapagar.models.ContaVencimento;
 import br.com.azuyr.italo.contasapagar.utils.Util;
 
 public class CategoriaActivity extends AppCompatActivity {
 
     private FormularioHelper helper;
-    private ListView listaCategoriasVencimentos;
     private Util util;
 
     @Override
@@ -28,10 +28,10 @@ public class CategoriaActivity extends AppCompatActivity {
         util = new Util();
 
         Intent intent = getIntent();
-        Categoria categoria = (Categoria) intent.getSerializableExtra("conta");
+        ContaVencimento contaVencimento = (ContaVencimento) intent.getSerializableExtra("conta");
 
-        if(categoria != null){
-            helper.preencheFormulario(categoria);
+        if(contaVencimento != null){
+            helper.preencheFormulario(contaVencimento);
         }
     }
 
@@ -48,16 +48,16 @@ public class CategoriaActivity extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.menu_categoria_salvar:
-                Categoria categoria = helper.getCategoria();
+                ContaVencimento contaVencimento = helper.getContaVencimento();
 
                 ContasAPagarDAO dao = new ContasAPagarDAO(this);
 
-                if(categoria.getId() != null){
-                    dao.altera(categoria);
-                    Toast.makeText(CategoriaActivity.this, "Categoria '" + categoria.getNome() + "' Alterada com Sucesso!", Toast.LENGTH_SHORT).show();
+                if(contaVencimento.getId() != null){
+                    dao.altera(contaVencimento);
+                    Toast.makeText(CategoriaActivity.this, "Conta '" + contaVencimento.getResumo() + "' Alterada com Sucesso!", Toast.LENGTH_SHORT).show();
                 }else {
-                    dao.insere(categoria);
-                    Toast.makeText(CategoriaActivity.this, "Categoria '" + categoria.getNome() + "' Salva com Sucesso!", Toast.LENGTH_SHORT).show();
+                    dao.insere(contaVencimento);
+                    Toast.makeText(CategoriaActivity.this, "Conta '" + contaVencimento.getResumo() + "' Salva com Sucesso!", Toast.LENGTH_SHORT).show();
                 }
 
                 dao.close();

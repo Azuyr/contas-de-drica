@@ -5,6 +5,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 import br.com.azuyr.italo.contasapagar.CategoriaActivity;
 
 public class Util {
@@ -33,5 +38,14 @@ public class Util {
         alerta = builder.create();
         //Exibe
         alerta.show();
+    }
+
+    public static String setLongGetDate(Long dataEmMilisegundos){
+
+        Date dt = new Date(dataEmMilisegundos);
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        df.setTimeZone (TimeZone.getTimeZone ("GMT"));
+
+        return df.format (dt);
     }
 }

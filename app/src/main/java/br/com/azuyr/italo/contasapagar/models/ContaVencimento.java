@@ -2,6 +2,8 @@ package br.com.azuyr.italo.contasapagar.models;
 
 import java.io.Serializable;
 
+import br.com.azuyr.italo.contasapagar.utils.Util;
+
 public class ContaVencimento implements Serializable{
 
     private Long id;
@@ -39,7 +41,7 @@ public class ContaVencimento implements Serializable{
     }
 
     public void setVencimento(Long vencimento) {
-        vencimento = vencimento;
+        this.vencimento = vencimento;
     }
 
 
@@ -53,7 +55,7 @@ public class ContaVencimento implements Serializable{
 
     @Override
     public String toString() {
-        return titulo + " | " + valor + " | " + vencimento;
+        return resumo + " | " + valor + " | " + Util.setLongGetDate(vencimento);
     }
 
 }
