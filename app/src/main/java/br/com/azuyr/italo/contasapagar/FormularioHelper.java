@@ -34,9 +34,9 @@ public class FormularioHelper {
     }
 
     public FormularioHelper(CategoriasListaActivity activity){
-        campoIdentificacaoNome = activity.findViewById(R.id.contas_vencimentos_titulo);
-        campoIdentificacaoEmail = activity.findViewById(R.id.contas_vencimentos_resumo);
-        campoIdentificacaoTelefone = activity.findViewById(R.id.contas_vencimentos_vencimento);
+        campoIdentificacaoNome = activity.findViewById(R.id.categorias_lista_nome_identificacao);
+        campoIdentificacaoEmail = activity.findViewById(R.id.categorias_lista_email_identificacao);
+        campoIdentificacaoTelefone = activity.findViewById(R.id.categorias_lista_telefone_identificacao);
 
         identificacao = new Identificacao();
     }

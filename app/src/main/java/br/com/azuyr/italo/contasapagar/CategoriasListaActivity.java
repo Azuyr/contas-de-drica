@@ -60,17 +60,17 @@ public class CategoriasListaActivity extends AppCompatActivity {
 
         registerForContextMenu(listaCategorias);
 
-//        helper = new FormularioHelper(this);
-//        util = new Util();
-//
-//        Intent intent = getIntent();
-//        ContasAPagarDAO dao = new ContasAPagarDAO(this);
-//
-//        Identificacao identificacao = dao.getIdentificacao();
-//
-//        if(identificacao != null){
-//            helper.preencheFormulario(identificacao);
-//        }
+        helper = new FormularioHelper(this);
+        util = new Util();
+
+        Intent intent = getIntent();
+        ContasAPagarDAO dao = new ContasAPagarDAO(this);
+
+        Identificacao identificacao = dao.getIdentificacao();
+
+        if(identificacao != null){
+            helper.preencheFormulario(identificacao);
+        }
     }
 
     private void carregaLista() {
@@ -139,8 +139,6 @@ public class CategoriasListaActivity extends AppCompatActivity {
                 }
 
                 dao.close();
-
-                finish();
                 break;
         }
 

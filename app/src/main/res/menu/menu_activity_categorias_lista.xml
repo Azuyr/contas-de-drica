@@ -4,7 +4,7 @@
     tools:context="br.com.azuyr.italo.contas.CategoriasListaActivity">
 
     <item android:id="@+id/menu_identificacao_salvar"
-        android:title="Salvar"
+        android:title="Salvar Identificação"
         app:showAsAction="always"/>
 
 </menu>
