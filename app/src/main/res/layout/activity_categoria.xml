@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/contas_vencimentos_titulo"
+            android:hint="Título"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"/>
+
+        <EditText
+            android:id="@+id/contas_vencimentos_resumo"
+            android:hint="Resumo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"/>
+
+        <EditText
+            android:id="@+id/contas_vencimentos_valor"
+            android:hint="0.00"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"/>
+
+        <EditText
+            android:id="@+id/contas_vencimentos_vencimento"
+            android:hint="Vencimento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date"/>
+
+    </LinearLayout>
+</ScrollView>

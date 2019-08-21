@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/categorias_lista_nome_identificacao"
+        android:hint="Nome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/categorias_lista_email_identificacao"
+        android:hint="E-mail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"/>
+
+    <EditText
+        android:id="@+id/categorias_lista_telefone_identificacao"
+        android:hint="Telefone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="phone"/>
+
+    <View
+        android:id="@+id/categorias_lista_linha_divisoria"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#ffb300" />
+
+    <EditText
+        android:id="@+id/categorias_lista_pesquisa"
+        android:hint="Pesquise Aqui"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textFilter"/>
+
+    <TextView
+        android:text="Lista de Contas:"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ListView
+        android:id="@+id/categorias_lista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
+
+    <!--elevation = Sombra | sp = Acessibilidade-->
+    <Button
+        android:id="@+id/categorias_botao_novo"
+        android:text="+"
+        android:textColor="#ffffff"
+        android:textSize="40sp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:elevation="6dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/fundo"/>
+    </RelativeLayout>
+</LinearLayout>
